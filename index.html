@@ -3,42 +3,369 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Corporación Del Laboratorio al Campo</title>
+    <title>DLC | Del Laboratorio al campo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            color: #333;
+        /* CSS RESET & GENERAL STYLES */
+        :root {
+            --primary: #1A252F; 
+            --secondary: #1ABC9C; 
+            --gradient: linear-gradient(90deg, #1ABC9C, #00C9FF); 
+            --bg-light: #F8FAFC; 
+            --text-main: #34495E;
+            --text-light: #64748B;
+            --white: #FFFFFF;
+            --font-main: 'Open Sans', sans-serif;
+            --font-heading: 'Poppins', sans-serif;
         }
-        .container {
-            text-align: center;
-            background: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            max-width: 600px;
-            margin: 20px;
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-main); color: var(--text-main); background-color: var(--white); line-height: 1.6; }
+        h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; color: var(--primary); }
+        a { text-decoration: none; color: inherit; transition: color 0.3s; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; } 
+        .btn { display: inline-block; padding: 12px 30px; background-color: var(--secondary); color: var(--white); border-radius: 25px; font-weight: 600; text-transform: uppercase; font-size: 14px; border: none; cursor: pointer; transition: background-color 0.3s, transform 0.2s; }
+        .btn:hover { background-color: #16a085; transform: scale(1.02); }
+
+        /* HEADER */
+        header { background-color: var(--white); padding: 20px 0; border-bottom: 1px solid #eee; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
+        header .container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; }
+        .logo { font-size: 22px; font-weight: 700; color: var(--primary); font-family: var(--font-heading); }
+        .logo span { color: var(--secondary); }
+        nav ul { display: flex; gap: 25px; }
+        nav a { font-weight: 500; font-size: 15px; color: var(--primary); }
+        nav a:hover { color: var(--secondary); }
+
+        /* HERO SECTION */
+        #hero { padding: 160px 0 100px; text-align: center; background-color: var(--white); }
+        #hero h1 { font-size: 52px; line-height: 1.2; margin-bottom: 30px; font-weight: 800; max-width: 900px; margin-left: auto; margin-right: auto; }
+        .texto-gradiente { 
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; 
+            display: inline-block;
         }
-        h1 { color: #2c3e50; margin-bottom: 10px; }
-        p { font-size: 1.1em; line-height: 1.6; color: #666; }
-        .footer { margin-top: 30px; font-size: 0.9em; color: #888; border-top: 1px solid #eee; padding-top: 20px;}
+
+        /* QUIÉNES SOMOS Y QUÉ HACEMOS (Horizontal Cards) */
+        #somos-hacemos { padding: 80px 0; background-color: var(--bg-light); }
+        #somos-hacemos h2 { text-align: center; margin-bottom: 30px; font-size: 32px; }
+        .descripcion-empresa { text-align: center; font-size: 17px; color: var(--text-main); margin-bottom: 60px; line-height: 1.8; max-width: 850px; margin-left: auto; margin-right: auto; }
+        
+        .lista-horizontal { display: flex; flex-direction: column; gap: 25px; }
+        /* 1. Contenedor principal de la tarjeta: Cambiamos a centrado vertical */
+        .tarjeta-h { 
+            display: flex; 
+            align-items: center; /* <-- CAMBIO: de flex-start a center para que el icono quede en el medio */
+            background-color: var(--white); 
+            padding: 35px 40px; 
+            border-radius: 12px; 
+            border: 1px solid #e2e8f0; 
+            text-align: left; 
+            transition: transform 0.3s, box-shadow 0.3s; 
+        }
+        .tarjeta-h:hover { transform: translateY(-3px); box-shadow: 0 12px 20px rgba(0,0,0,0.04); border-color: #cbd5e1; }
+        
+        /* 2. Contenedor del Icono: Damos más espacio para que no choque con el texto */
+        .tarjeta-h .icono { 
+            margin-right: 30px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            min-width: 90px; /* <-- CAMBIO: de 60px a 90px para darle más aire */
+        }
+
+        /* 3. Imagen del Icono: Aumentamos el tamaño */
+        .tarjeta-h .icono img { 
+            width: 80px;  /* <-- CAMBIO: de 50px a 80px */
+            height: 80px; /* <-- CAMBIO: de 50px a 80px */
+            object-fit: contain; 
+        }
+
+        /* METODOLOGÍA */
+        #metodologia { padding: 80px 0; background-color: var(--white); text-align: center; }
+        #metodologia h2 { margin-bottom: 30px; font-size: 32px; }
+        #metodologia p.intro { max-width: 700px; margin: 0 auto 50px; color: var(--text-light); font-size: 16px; }
+        .metodologia-grafico-container { background-color: var(--bg-light); padding: 40px; border-radius: 15px; border: 1px solid #e2e8f0; }
+        .metodologia-grafico-img { max-width: 100%; height: auto; }
+
+        /* EL EQUIPO */
+        #equipo { padding: 80px 0; background-color: var(--bg-light); }
+        #equipo h2 { text-align: center; margin-bottom: 50px; font-size: 32px; }
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; justify-items: center; max-width: 1200px; margin: 0 auto; }
+        .team-card { text-align: center; max-width: 240px; }
+        .team-card img { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; border: 3px solid var(--white); box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
+        .team-card h3 { font-size: 18px; margin-bottom: 5px; }
+        .team-card p.role { color: var(--secondary); font-weight: 700; font-size: 13px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .team-card p.bio { color: var(--text-light); font-size: 14px; line-height: 1.5; }
+
+        /* PROYECTOS (Horizontal Cards) */
+        #proyectos { padding: 80px 0; background-color: var(--white); }
+        #proyectos h2 { text-align: center; margin-bottom: 50px; font-size: 32px; }
+        
+        .tarjeta-h-proyecto { display: flex; flex-direction: column; justify-content: center; background-color: var(--bg-light); padding: 35px 40px; border-radius: 12px; border: 1px solid #e2e8f0; text-align: left; transition: transform 0.3s, box-shadow 0.3s; }
+        .tarjeta-h-proyecto:hover { transform: translateY(-3px); box-shadow: 0 12px 20px rgba(0,0,0,0.04); }
+        .tarjeta-h-proyecto h3 { font-size: 22px; margin-bottom: 12px; color: var(--primary); }
+        .tarjeta-h-proyecto p.summary { color: var(--text-main); font-size: 16px; margin-bottom: 15px; font-weight: 600; }
+        .tarjeta-h-proyecto p.details { color: var(--text-light); font-size: 15px; margin-bottom: 6px; }
+        .tarjeta-h-proyecto .details span { font-weight: 700; color: var(--text-main); }
+
+        /* CONTACTANOS */
+        #contacto { padding: 80px 0; background-color: var(--primary); color: var(--white); }
+        #contacto h2 { text-align: center; margin-bottom: 50px; color: var(--white); font-size: 32px; }
+        .contacto-content { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; max-width: 1000px; margin: 0 auto; }
+        .contacto-form { background-color: rgba(255,255,255,0.05); padding: 40px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 14px; color: #cbd5e1; }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid rgba(255,255,255,0.2); border-radius: 5px; font-family: var(--font-main); font-size: 15px; background: transparent; color: var(--white); outline: none; }
+        .form-group input:focus, .form-group textarea:focus { border-color: var(--secondary); }
+        .form-group textarea { height: 120px; resize: vertical; }
+        .contacto-info h3 { margin-bottom: 20px; font-size: 22px; color: var(--white); }
+        .contacto-info p { margin-bottom: 15px; color: #cbd5e1; font-size: 16px; }
+        .contacto-info p a { color: var(--secondary); font-weight: 600; }
+        .map-placeholder { background-color: rgba(255,255,255,0.1); height: 200px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #cbd5e1; margin-top: 30px; border: 1px dashed rgba(255,255,255,0.3); }
+
+        /* FOOTER */
+        footer { background-color: #0f172a; color: rgba(255,255,255,0.6); padding: 30px 0; text-align: center; font-size: 14px; border-top: 1px solid rgba(255,255,255,0.05); }
+        footer .logo { color: var(--white); font-size: 20px; display: block; margin-bottom: 10px; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            #hero h1 { font-size: 36px; }
+            .contacto-content { grid-template-columns: 1fr; }
+            nav ul { display: none; } 
+            .tarjeta-h { flex-direction: column; align-items: flex-start; padding: 30px; }
+            .tarjeta-h .icono { margin-right: 0; margin-bottom: 20px; }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Corporación Del Laboratorio al Campo</h1>
-        <p>Nuestro sitio web se encuentra actualmente en mantenimiento programado para mejoras en nuestra plataforma.</p>
-        <p>Estamos trabajando en proyectos de innovación tecnológica y bioingeniería para el sector rural.</p>
-        
-        <div class="footer">
-            <p>Entidad Sin Ánimo de Lucro (ESAL) - Colombia<br>
-            Contacto: info@labalcampo.org</p>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <a href="#" class="logo"><span>DLC</span> | Del Laboratorio al campo</a>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Inicio</a></li>
+                    <li><a href="#somos-hacemos">Quiénes Somos</a></li>
+                    <li><a href="#metodologia">Metodología</a></li>
+                    <li><a href="#equipo">Equipo</a></li>
+                    <li><a href="#proyectos">Proyectos</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
         </div>
-    </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="hero">
+        <div class="container">
+            <h1>Transformamos ciencia, tecnología e ingeniería en <br><span class="texto-gradiente">soluciones de alto valor para empresas y comunidades</span></h1>
+            <a href="#contacto" class="btn">Contactanos</a>
+        </div>
+    </section>
+
+    <!-- QUIÉNES SOMOS Y QUÉ HACEMOS -->
+    <section id="somos-hacemos">
+        <div class="container">
+            <h2>Quiénes somos y qué hacemos</h2>
+            <div class="descripcion-empresa">
+                <p><strong>Del Laboratorio al Campo - DLC</strong> es una organización orientada al desarrollo tecnológico de alto impacto, la investigación científica y la innovación aplicada. Creamos, prototipamos e integramos hardware, software, IoT y sensores bajo un enfoque centrado en las personas y las empresas. Buscamos que cada desarrollo, desde su conceptualización en el laboratorio hasta su despliegue en campo, responda de manera oportuna a los retos reales de la industria y el sector productivo.</p>
+            </div>
+            
+            <div class="lista-horizontal">
+                <!-- Tarjeta Horizontal 1 -->
+                <div class="tarjeta-h">
+                    <div class="icono">
+                        <img src="img/icono-iot.png" alt="Icono de Internet de las Cosas">
+                    </div>
+                    <div class="info">
+                        <h3>Internet de las Cosas (IoT)</h3>
+                        <p>Diseño e implementación de arquitecturas IoT end-to-end adaptadas a contextos urbanos, rurales e industriales para captura de datos y monitoreo en tiempo real. Construimos, prototipamos e integramos dispositivos IoT con autonomía energética, sensores, actuadores y preprocesamiento.</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta Horizontal 2 -->
+                <div class="tarjeta-h">
+                    <div class="icono">
+                        <img src="img/icono-hardware.png" alt="Icono de Hardware y Sistemas Embebidos">
+                    </div>
+                    <div class="info">
+                        <h3>Hardware y Sistemas Embebidos</h3>
+                        <p>Diseño y desarrollo hardware a la medida mediante componentes electrónicos discretos pasivos/activos y su integración en sustrato, integrando electrónica analógica y digital para requerimientos de operación específicos.</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta Horizontal 3 -->
+                <div class="tarjeta-h">
+                    <div class="icono">
+                        <img src="img/icono-sensores.png" alt="Icono de Sensores e Instrumentación">
+                    </div>
+                    <div class="info">
+                        <h3>Sensores e Instrumentación</h3>
+                        <p>Integración de sistemas para el monitoreo de variables físicas y químicas, sumado a la investigación en fabricación de sensores electroquímicos y sus interfaces (readout y front-end).</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta Horizontal 4 -->
+                <div class="tarjeta-h">
+                    <div class="icono">
+                        <img src="img/icono-redes.png" alt="Icono de Redes y Telecomunicaciones">
+                    </div>
+                    <div class="info">
+                        <h3>Redes y Telecomunicaciones</h3>
+                        <p>Despliegue de redes de área amplia y bajo consumo energético, como LoRaWAN, garantizando sistemas de comunicaciones eficientes en entornos complejos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- METODOLOGÍA -->
+    <section id="metodologia">
+        <div class="container">
+            <h2>Nuestra Metodología Modular</h2>
+            <p class="intro">Implementamos validaciones rápidas e iteraciones a partir de retroalimentación constante para garantizar soluciones escalables y eficientes.</p>
+            <div class="metodologia-grafico-container">
+                <!-- Gráfico de Metodología -->
+                <img src="img/metodologia-grafico.png" alt="Gráfico de Metodología de Diseño Centrado en Personas y Aplicaciones DLC" class="metodologia-grafico-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- EL EQUIPO -->
+    <section id="equipo">
+        <div class="container" style="max-width: 1200px;">
+            <h2>Nuestro equipo base</h2>
+            <div class="team-grid">
+                <div class="team-card">
+                    <img src="img/paula_parra.png" alt="Paula Parra">
+                    <h3>Paula Parra</h3>
+                    <p class="role">Directora General</p>
+                    <p class="bio">Ingeniera química. Experiencia en educación y procesos STEM, diseño de experimentos y procesos químicos. Cofundadora DLC.</p>
+                </div>
+                <div class="team-card">
+                    <img src="img/carolina_salguero.jpeg" alt="Carolina Salguero">
+                    <h3>Carolina Salguero</h3>
+                    <p class="role">Investigadora Científica</p>
+                    <p class="bio">Bioquímica y PhD en bioquímica por Harvard University, Experiencia en procesos bioquímicos, DNA, ensayos/protocolos aplicados a la investigación. Cofundadora DLC.</p>
+                </div>
+                <div class="team-card">
+                    <img src="img/paola_duarte.jpeg" alt="Paola Duarte">
+                    <h3>Paola Duarte</h3>
+                    <p class="role">Investigadora Científica</p>
+                    <p class="bio">Ingeniera biológica Universidad Nacional de Colombia, PhD(C) en Biological Systems Engineering por UC Davis. Experiencia en bioprocesos, caracterización de materiales. Cofundadora DLC.</p>
+                </div>
+                <div class="team-card">
+                    <img src="img/shary_llanos.png" alt="Shary Llanos">
+                    <h3>Shary Llanos</h3>
+                    <p class="role">Consultora TI</p>
+                    <p class="bio">Ingeniera de Sistemas, maestría en computer science por Worcester Polytechnic Institute. Experiencia en tecnologías de la información, ciberseguridad y arquitectura de sistemas. Condundadora DLC.</p>
+                </div>
+                <div class="team-card">
+                    <img src="img/George_Archbold.png" alt="George Archbold Taylor">
+                    <h3>George Archbold</h3>
+                    <p class="role">Investigador Científico</p>
+                    <p class="bio">Ingeniero electrónico, PhD en bioscience engineering por Ghent university y PhD en ingeniería por la Pontificia Universidad Javeriana Bogotá. Experiencia en Sistemas embebidos, IoT, instrumentación electrónica y sensores electroquímicos. Confundador DLC.</p>
+                </div>
+                 <div class="team-card">
+                    <img src="img/Edith_munoz.png" alt="Edith Muñoz">
+                    <h3>Edith Muñoz</h3>
+                    <p class="role">Ingeniera de Aplicaciones</p>
+                    <p class="bio">Ingeniera electrónica, estudiante de master en IA por la UNIR. Experiencia en ECAD, firmware, IA, IoT, Hardware Testing.</p>
+                </div>
+                <div class="team-card">
+                    <img src="img/ronny_toro.png" alt="Ronny Toro">
+                    <h3>Ronny Toro</h3>
+                    <p class="role">Ingeniero de Aplicaciones</p>
+                    <p class="bio">Ingeniero electrónico, Tecnólogo en Automatización Industrial y estudiante maestría en ingeniería por la UTB. Experiencia en ECAD, IoT, hardware testing, desarrollo de interfaces y prototipado ágil.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROYECTOS -->
+    <section id="proyectos">
+        <div class="container">
+            <h2>Algunos proyectos en los que hemos participado</h2>
+            <div class="lista-horizontal">
+
+                <div class="tarjeta-h-proyecto">
+                    <h3>Desarrollo de un modelo de transferencia y apropiación de tecnologías del Internet de las Cosas para los agricultores colombianos de pequeña escala (Proyecto recursos Minciencias, código 124180864555).</h3>
+                    <p class="details"><span>Rol DLC:</span> Aliado, coejecutor. Implementación de estrategías de apropiación social del conocimiento en el contexto del uso de tecnologías en la agricultura.</p>
+                    <p class="details"><span>Entidad contratante:</span> Universidad Autónoma de Bucaramanga.</p>
+                </div>
+                <div class="tarjeta-h-proyecto">
+                    <h3> (Fortalecimiento de la gestión del riesgo de desastres, a partir de la generación de conocimiento e innovación social en el departamento archipiélago de San Andrés y Providencia (Proyecto recursos SGR/Minciencias, código BPIN 2021000100041).</h3>
+                    <p class="details"><span>Rol DLC:</span> Aliado, coejecutor. Desarrollo de una red de monitoreo de variables climáticas con sistema embebido propio, sensores de bajo costo, soportada en tecnología LoRaWAN y desarrollo de plataforma web integradora de información.</p>
+                    <p class="details"><span>Entidad contratante:</span> Universidad Nacional de Colombia Sede Caribe.</p>
+                </div>                
+                <div class="tarjeta-h-proyecto">
+                    <h3> (Evaluación del potencial de aprovechamiento del material remanente del proceso de incineración de RSU utilizado en la producción de electricidad en la Isla de San Andrés para el desarrollo de nuevos productos (Proyecto recursos SGR/Minciencias, código BPIN 2021000100040).</h3>
+                    <p class="details"><span>Rol DLC:</span> Aliado, coejecutor. Desarrollo tecnológico e implementación de una red de monitoreo de residuos gaseosos mediante IoT, con sistema embebido propio e interfaz de usuario para análisis y seguimiento de datos.</p>
+                    <p class="details"><span>Entidad contratante:</span> Empresa de Energía del Archipiélago de San Andrés, Providencia y Santa Catalina, EEDAS S.A. E.S.P.</p>
+                </div>  
+                <div class="tarjeta-h-proyecto">
+                    <h3> (Implementación de un sistema de monitoreo periódico y en tiempo real para cuerpos de agua superficial continental con sensores remotos, base de datos y procedimientos de diseño propio para el departamento de Bolívar (Proyecto recursos SGR/Minciencias, código BPIN 2020000100467).</h3>
+                    <p class="details"><span>Rol DLC:</span> Contratista, Prestación de Servicios Tecnológicos para la fabricación y desarrollo de dispositivos prototipo de monitoreo IoT para la medición de parámetros fisicoquímicos en cuerpos de agua.</p>
+                    <p class="details"><span>Entidad contratante:</span> Universidad de Cartagena.</p>
+                </div>  
+                <div class="tarjeta-h-proyecto">
+                    <h3> (Integración de procesos con la comunidad para la construcción de un tanque elevado y una huerta comunitaria en la ranchería Ishipa - Manaure.</h3>
+                    <p class="details"><span>Rol DLC:</span> Ejecutor del proyecto. Diseño y despliegue de sistema solar fotovoltaico, tanque elevado, procesos educativos e integración social centrada en las personas.</p>
+                    <p class="details"><span>Entidad contratante:</span> Embajada Suiza en Colombia (Financiador).</p>
+                </div>  
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTANOS -->
+    <section id="contacto">
+        <div class="container">
+            <h2>¿Listo para investigar, crear e innovar? Conversemos.</h2>
+            <div class="contacto-content">
+                <form class="contacto-form" action="#" method="post">
+                    <div class="form-group">
+                        <label for="name">Nombre o Empresa</label>
+                        <input type="text" id="name" name="name" required placeholder="Ingresa tu nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" required placeholder="ejemplo@correo.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Cuéntanos sobre tu necesidad</label>
+                        <textarea id="message" name="message" required placeholder="Escribe tu mensaje aquí..."></textarea>
+                    </div>
+                    <button type="submit" class="btn">Enviar Mensaje</button>
+                </form>
+                <div class="contacto-info">
+                    <h3>Información de Contacto</h3>
+                    <p>Si tienes un desafío industrial o buscas llevar investigación, tecnología e innovación a tu territorio, nuestro equipo está listo para asesorarte.</p>
+                    <p><strong>Email:</strong> <a href="mailto:info@labalcampo.org">info@labalcampo.org</a></p>
+                    <div class="map-placeholder">
+                        <span>[Mapa / Ubicación]</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <a href="#" class="logo"><span>DLC</span> | Del Laboratorio al campo</a>
+            <p>&copy; 2026 Labalcampo. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
 </body>
 </html>
